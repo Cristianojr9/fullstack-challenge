@@ -1,6 +1,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.createTable("profession", {
+    return queryInterface.createTable("professions", {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -10,22 +10,21 @@ module.exports = {
       description: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true,
       },
       active: {
         type: Sequelize.BOOLEAN,
         defaultValue: true,
       },
-      createdAt: {
+      created_at: {
         type: Sequelize.DATE,
         allowNull: false,
       },
-      updatedAt: {
+      updated_at: {
         type: Sequelize.DATE,
         allowNull: false,
       }
     })
   },
 
-  down: async (queryInterface) => queryInterface.dropTable("profession"),
+  down: async (queryInterface) => queryInterface.dropTable("professions"),
 };

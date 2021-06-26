@@ -1,16 +1,16 @@
-const { Sequelize } = require("sequelize/types")
+import Sequelize, { Model } from "sequelize";
 
 class Profession extends Model {
-  static define(sequelize) {
-    super.define(
+  static init(sequelize, freezeTableName, timestamps) {
+    super.init(
       {
         description: Sequelize.STRING,
         active: Sequelize.BOOLEAN,
-        createdAt: DataTypes.DATE,
-        updatedAt: DataTypes.DATE
       },
       {
         sequelize,
+        freezeTableName,
+        timestamps,
       }
     )
   }

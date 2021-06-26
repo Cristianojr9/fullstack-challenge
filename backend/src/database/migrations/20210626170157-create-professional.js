@@ -1,6 +1,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.createTable("professional", {
+    return queryInterface.createTable("professionals", {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -25,7 +25,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "profession",
+          model: "professions",
           key: "id"
         }
       },
@@ -33,16 +33,16 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         defaultValue: true,
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE,
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE,
       },
     })
   },
 
-  down: async (queryInterface) => queryInterface.createTable("professional"),
+  down: async (queryInterface) => queryInterface.dropTable("professionals"),
 };

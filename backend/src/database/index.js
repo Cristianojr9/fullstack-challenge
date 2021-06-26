@@ -1,11 +1,11 @@
 import Sequelize from "sequelize";
 
-import Professional from "../app/models/Professional";
+// import Professional from "../app/models/Professional";
 import Profession from "../app/models/Profession";
 
 import databaseConfig from "../config/database";
 
-const models = [Professional, Profession];
+const models = [Profession];
 
 class Database { 
   constructor() {
@@ -15,7 +15,7 @@ class Database {
   init() {
     this.connection = new Sequelize(databaseConfig);
 
-    models.map(model => )
+    models.map(model => model.init(this.connection));
   }
 }
 
