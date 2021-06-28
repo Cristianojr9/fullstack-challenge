@@ -20,7 +20,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      typeProfession: {
+      professionId: {
         field: "profession_id",
         type: Sequelize.INTEGER,
         allowNull: false,

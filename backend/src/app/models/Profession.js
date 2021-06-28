@@ -1,7 +1,7 @@
 import Sequelize, { Model } from "sequelize";
 
 class Profession extends Model {
-  static init(sequelize, freezeTableName, timestamps) {
+  static init(sequelize) {
     super.init(
       {
         description: Sequelize.STRING,
@@ -9,8 +9,6 @@ class Profession extends Model {
       },
       {
         sequelize,
-        freezeTableName,
-        timestamps,
       }
     )
   }
