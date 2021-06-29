@@ -36,7 +36,7 @@ Ao começar estudar NodeJs, sequelize foi o primeiro ORM NodeJs para banco de da
 
 ### Docker
 
-Docker foi utilizado para criar um container localmente, durante o bootcamp fui apresentado ao docker, então meu primeiro contato com o backend foi utilizando ele e foi por isso que resolvi implementar no projeto também.
+Docker foi utilizado para criar um container localmente, durante o bootcamp fui apresentado ao docker, então meu primeiro contato com o backend foi utilizando ele e é por isso que resolvi implementar no projeto também.
 
 ### Yup
 
@@ -51,10 +51,6 @@ Yup é um pacote de validação muito simples de trabalhar no Javascript, por co
 ```http
   GET /profession
 ```
-
-| Paramêtro | Tipo | Descrição |
-| :-------- | :--- | :-------- |
-| null      | null | null      |
 
 #### Buscar uma profissão
 
@@ -72,10 +68,14 @@ Yup é um pacote de validação muito simples de trabalhar no Javascript, por co
   POST /profession
 ```
 
-| Paramêtro     | Tipo      | Descrição                            |
-| :------------ | :-------- | :----------------------------------- |
-| `description` | `string`  | **Required**. Nome da profissão      |
-| `active`      | `boolean` | **Required**. Se estará ativa ou não |
+- Corpo da requisição
+
+```javascript
+{
+    "description": "description",
+    "active": true,
+}
+```
 
 #### Editar uma profissão
 
@@ -83,11 +83,18 @@ Yup é um pacote de validação muito simples de trabalhar no Javascript, por co
   PUT /profession/${id}
 ```
 
-| Paramêtro     | Tipo      | Description                          |
-| :------------ | :-------- | :----------------------------------- |
-| `id`          | `integer` | **Required**. Id da profissão        |
-| `description` | `string`  | **Required**. Nome da profissão      |
-| `active`      | `boolean` | **Required**. Se estará ativa ou não |
+| Paramêtro | Tipo      | Description                   |
+| :-------- | :-------- | :---------------------------- |
+| `id`      | `integer` | **Required**. Id da profissão |
+
+- Corpo da requisição
+
+```javascript
+{
+    "description": "description",
+    "active": true,
+}
+```
 
 ### Profissionais
 
@@ -96,10 +103,6 @@ Yup é um pacote de validação muito simples de trabalhar no Javascript, por co
 ```http
   GET /professional
 ```
-
-| Paramêtro | Tipo | Descrição |
-| :-------- | :--- | :-------- |
-| null      | null | null      |
 
 #### Buscar um profissional
 
@@ -117,13 +120,17 @@ Yup é um pacote de validação muito simples de trabalhar no Javascript, por co
   POST /professional
 ```
 
-| Paramêtro      | Tipo      | Descrição                              |
-| :------------- | :-------- | :------------------------------------- |
-| `name`         | `string`  | **Required**. Nome do profissional     |
-| `email`        | `string`  | **Required**. Email do profissional    |
-| `phone`        | `string`  | **Required**. Telefone do profissional |
-| `professionID` | `integer` | **Required**. ID da profissão          |
-| `active`       | `boolean` | **Required**. Se estará ativa ou não   |
+- Corpo da requisição
+
+```javascript
+{
+    "name": "name",
+    "email": "email",
+    "phone": "phone",
+    "professionId": 1
+    "active": true,
+}
+```
 
 #### Editar uma profissão
 
@@ -131,14 +138,21 @@ Yup é um pacote de validação muito simples de trabalhar no Javascript, por co
   PUT /professional/${id}
 ```
 
-| Paramêtro      | Tipo      | Description                            |
-| :------------- | :-------- | :------------------------------------- |
-| `id`           | `integer` | **Required**. Id do profissional       |
-| `name`         | `string`  | **Required**. Nome do profissional     |
-| `email`        | `string`  | **Required**. Email do profissional    |
-| `phone`        | `string`  | **Required**. Telefone do profissional |
-| `professionID` | `integer` | **Required**. ID da profissão          |
-| `active`       | `boolean` | **Required**. Se estará ativa ou não   |
+| Paramêtro | Tipo      | Description                      |
+| :-------- | :-------- | :------------------------------- |
+| `id`      | `integer` | **Required**. Id do profissional |
+
+- Corpo da requisição
+
+```javascript
+{
+    "name": "name",
+    "email": "email",
+    "phone": "phone",
+    "professionId": 1
+    "active": true,
+}
+```
 
 ## Rodando localmente
 
