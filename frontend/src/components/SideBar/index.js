@@ -20,18 +20,18 @@ const SideBar = () => {
             <AiOutlineHome color="#7edce2" size={22} style={{ marginLeft: 20 }} />
             Home
           </Item>
-          <Item>
-            <Link to="/professionals">
-              <MdPersonOutline color="#7edce2" size={22} style={{ marginLeft: 20 }} />
-              Profissionais
-            </Link>
-          </Item>
-          <Item>
-            <Link to="/professions">
+          <Link to="/professionals">
+            <Item>
+                <MdPersonOutline color="#7edce2" size={22} style={{ marginLeft: 20 }} />
+                Profissionais
+            </Item>
+          </Link>
+          <Link to="/professions">
+            <Item>
               <MdWork color="#7edce2" size={22} style={{ marginLeft: 20 }} />
               Profissões
-            </Link>
-          </Item>
+            </Item>
+          </Link>
         </NavBar>
       </Content>
     </Container>
