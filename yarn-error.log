@@ -1,0 +1,36 @@
+Arguments: 
+  /snap/node/4812/bin/node /usr/local/bin/yarn global dir --json
+
+PATH: 
+  /home/cristiano/.zinit/polaris/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+
+Yarn version: 
+  1.22.10
+
+Node version: 
+  14.17.1
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: EACCES: permission denied, write
+      at writeSync (fs.js:733:3)
+      at SyncWriteStream._write (internal/fs/sync_write_stream.js:24:3)
+      at writeOrBuffer (internal/streams/writable.js:358:12)
+      at SyncWriteStream.Writable.write (internal/streams/writable.js:303:10)
+      at JSONReporter._dump (/usr/local/lib/node_modules/yarn/lib/cli.js:49772:12)
+      at JSONReporter.log (/usr/local/lib/node_modules/yarn/lib/cli.js:49800:10)
+      at dir (/usr/local/lib/node_modules/yarn/lib/cli.js:36256:14)
+      at Object.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:25940:25)
+      at Generator.next (<anonymous>)
+      at step (/usr/local/lib/node_modules/yarn/lib/cli.js:310:30)
+
+npm manifest: 
+  No manifest
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
