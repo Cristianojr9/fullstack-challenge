@@ -1,9 +1,18 @@
-import React from 'react';
+import React from "react";
 
-import { SideBar } from "../../components";
+import WelcomeImg from "../../assets/welcome.svg";
+
+import { Container, Content } from "./styles";
 
 const Home = () => {
-  return <SideBar />;
+  return (
+    <Container>
+      <Content>
+        <span>Olá, seja bem-vindo<br/>Aqui você gerencia seus profissionais e profissões</span>
+        <img src={WelcomeImg} alt="welcome"/>
+      </Content>
+    </Container>
+  );
 }
 
 export { Home };

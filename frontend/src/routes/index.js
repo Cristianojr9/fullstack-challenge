@@ -1,12 +1,12 @@
 import React from "react";
 import { Switch, Route } from "react-router";
 
-import { Home } from "../pages";
+import { DefaultLayout } from "../_layouts";
 
 const Routes = () => (
   <>
     <Switch>
-      <Route path="/" component={Home} />
+      <Route path="/" component={DefaultLayout} />
     </Switch>
   </>
 );
