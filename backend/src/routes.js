@@ -1,16 +1,13 @@
-import { Router } from "express";
+"use strict"
 
-import ProfessionController from "./app/controllers/ProfessionController";
-import ProfissionalController from "./app/controllers/ProfessionalController";
+import ProfessionRoute from "./app/modules/Profession/Routes/ProfessionRoutes";
+import ProfessionalRoute from "./app/modules/Professional/Routes/ProfessionalRoutes";
 
-const routes = new Router();
+const routes = (app) => {
+  app.use("/profession", ProfessionRoute);
+  app.use("/professional", ProfessionalRoute);
 
-// PROFESSION ROUTES 
-routes.post("/profession", ProfessionController.store);
-routes.get("/professions", ProfessionController.index);
-routes.get("/profession/:id", ProfessionController.show);
-routes.put("/profession/:id", ProfessionController.update);
-
-routes.post("/professional", ProfissionalController.store);
+  return app;
+}
 
 export default routes;

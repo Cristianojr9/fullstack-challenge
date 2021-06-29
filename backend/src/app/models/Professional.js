@@ -1,3 +1,5 @@
+'use strict';
+
 import Sequelize, { Model } from "sequelize";
 
 class Professional extends Model {
@@ -13,11 +15,13 @@ class Professional extends Model {
       {
         sequelize,
       }
-    )
+    );
+
+    return this;
   }
   
   static associate(models) {
-    super.belongsTo(models.Profession, {
+    this.belongsTo(models.Profession, {
       as: "Profession",
       foreignKey: "profession_id"
     })

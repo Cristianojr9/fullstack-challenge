@@ -1,23 +1,15 @@
 import express from "express";
+import bodyParser from "body-parser";
+import cors from "cors";
 import routes from "./routes";
 
 import "./database";
 
-class App {
-  constructor() {
-    this.server = express();
+const app = express();
 
-    this.middlewares();
-    this.routes();
-  }
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use('/', routes(express.Router()));
 
-  middlewares() {
-    this.server.use(express.json());
-  }
-
-  routes() {
-    this.server.use(routes);
-  }
-}
-
-export default new App().server;
+module.exports = app;

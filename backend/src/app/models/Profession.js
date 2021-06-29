@@ -11,6 +11,8 @@ class Profession extends Model {
         sequelize,
       }
     )
+
+    return this;
   }
 }
 

@@ -1,5 +1,7 @@
+'use strict'
+
 import * as Yup from "yup";
-import Profession from "../models/Profession";
+import Profession from "../../../models/Profession";
 
 export default {
   // CREATE
