@@ -84,7 +84,7 @@ export const Form = styled(FormC)`
 
   background: #fff;
   width: 500px;
-  height: 320px;
+  height: 520px;
   padding: 20px;
   border-radius: 10px;
 `;
@@ -96,6 +96,7 @@ export const Input = styled(Field)`
   font-size: 18px;
   border: 2px solid #036672;
   border-radius: 10px;
+  margin: 0px 0;
 `;
 
 export const InputGroupsModal = styled.div`

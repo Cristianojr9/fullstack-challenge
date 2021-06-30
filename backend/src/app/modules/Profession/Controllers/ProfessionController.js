@@ -9,7 +9,7 @@ export default {
     try {
       const schema = Yup.object().shape({
         description: Yup.string().required(),
-        active: Yup.bool().required()
+        active: Yup.bool()
       });
 
       if (!(await schema.isValid(req.body))) {
@@ -22,9 +22,10 @@ export default {
         return res.status(400).json({ error: "Profession already exists" });
       }
 
-      const { description, active } = await Profession.create(req.body);
+      const { id, description, active } = await Profession.create(req.body);
 
       return res.status(201).json({
+        id,
         description, 
         active
       });
@@ -62,7 +63,7 @@ export default {
     try {
       const schema = Yup.object().shape({
         description: Yup.string().required(),
-        active: Yup.bool().required()
+        active: Yup.bool()
       });
 
       if (!(await schema.isValid(req.body))) {
@@ -71,9 +72,10 @@ export default {
 
       const profession = await Profession.findOne({ where: { id: req.params.id } });
 
-      const { description, active } = await profession.update(req.body);
+      const { id, description, active } = await profession.update(req.body);
 
       return res.status(200).json({
+        id,
         description, 
         active
       });

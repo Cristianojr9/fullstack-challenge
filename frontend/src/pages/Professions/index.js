@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Formik } from "formik";
 import { MdClose } from "react-icons/md";
 
+import { professionSchema } from "../../util";
+
 import { useProfession } from "../../hooks";
 import { Table } from "../../components";
 
@@ -40,6 +42,8 @@ const Professions = () => {
   const [selectedProfession, setSelectedProfession] = useState({});
   const [rows, setRows] = useState([]);
 
+  const { id } = selectedProfession;
+
   useEffect(() => {
     listProfessions();
   }, [listProfessions]);
@@ -55,12 +59,39 @@ const Professions = () => {
     setIsOpen(true);
   };
 
-  const handleCloseModal = () => {
+  const handleCloseModal = (refresh = false) => {
     setIsOpen(false);
 
     setSelectedProfession({});
     setEditMode(false);
+
+    if (refresh) listProfessions();
   };
+
+  const handleSubmit = (values) => {
+    if (values.active) {
+      if (id) { 
+        editProfession(values, id);
+        handleCloseModal(true); 
+      } else {
+        storeProfession(values)
+        handleCloseModal(true);
+      }
+    }
+
+    const data = { 
+      description: values.description,
+      active: false
+    };
+
+    if (id) { 
+      editProfession(data, id);
+      handleCloseModal(true); 
+    } else {
+      storeProfession(data);
+      handleCloseModal(true);
+    }
+  }
 
   return (
     <Container>
@@ -75,6 +106,7 @@ const Professions = () => {
           columns={columns} 
           rows={rows}  
           loading={isLoading} 
+          pageSize={7}
           onCellClick={(val) => {
             setSelectedProfession(val)
             setIsOpen(true)
@@ -92,11 +124,9 @@ const Professions = () => {
         {(
           <Formik
             initialValues={selectedProfession}
-            // validationSchema={professionSchema}
+            validationSchema={professionSchema}
             onSubmit={(values) => {
-              if (selectedProfession) return editProfession(values, selectedProfession.id)
-              storeProfession(values)
-              // setIsOpen(false)
+              handleSubmit(values);
             }}
           > 
             <Form style={{ display: "grid" }}>

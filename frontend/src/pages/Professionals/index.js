@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Formik } from "formik";
 import { MdClose } from "react-icons/md";
 
-import { useProfessional } from "../../hooks";
+import { useProfessional, useProfession } from "../../hooks";
+import { phoneMask } from "../../util";
 import { Table } from "../../components";
 
 import { 
@@ -31,6 +32,7 @@ const columns = [
 
 const Professionals = () => {
   const { professionals, listProfessionals, isLoading } = useProfessional();
+  const { professions } = useProfession();
  
   const [isOpen, setIsOpen] = useState(false);
   const [rows, setRows] = useState([]);
@@ -77,23 +79,63 @@ const Professionals = () => {
           <Formik
             // initialValues={selectedProfession}
             // validationSchema={professionSchema}
-            /* onSubmit={(values) => {
-              if (selectedProfession) return editProfession(values, selectedProfession.id)
-              storeProfession(values)
-              setIsOpen(false)
-            }} */
+            onSubmit={(values) => {
+              console.log(values);
+            }}
           > 
             <Form style={{ display: "grid" }}>
               <HeaderModal>
-                <TitleModal>{!editMode ? "Adicionar Profissão" : "Editar Profissão"}</TitleModal>
+                <TitleModal>
+                  {
+                    !editMode ? 
+                    "Adicionar Profissão" : 
+                    "Editar Profissão"
+                  }
+                </TitleModal>
 
                 <MdClose size={25} onClick={handleCloseModal} style={{ cursor: "pointer" }}/>
               </HeaderModal>
-              <Input placeholder="Descrição" name="description" type="text" style={{ width: "100%" }} required/>
+              <Input 
+                placeholder="Nome" 
+                name="name" 
+                type="text" 
+                style={{ width: "100%" }} 
+                required
+              />
+              <Input 
+                placeholder="Email" 
+                name="email" 
+                type="text" 
+                style={{ width: "100%" }} 
+                required
+              />
+              <Input 
+                placeholder="Phone" 
+                name="phone" 
+                type="text" 
+                mask={phoneMask} 
+                style={{ width: "100%" }} 
+                required
+              />
+              <select>
+                {professions.map(({ id, description}) => (
+                  <p value={id} key={id}>
+                    {description}
+                  </p>
+                ))}
+              </select>
 
               <InputGroupsModal>
-                <Input type="checkbox" name="active" style={{ width: "20px", height: "20px" }} />
-                <label style={{ marginLeft: "10px" }}>Ativo</label> 
+                <Input 
+                  type="checkbox" 
+                  name="active" 
+                  style={{ width: "20px", height: "20px" }} 
+                />
+                <label 
+                  style={{ marginLeft: "10px" }}
+                >
+                  Ativo
+                </label> 
               </InputGroupsModal>
               <ButtonModal type="submit">{isLoading ? "Carregando" : "Salvar"}</ButtonModal>
             </Form>
