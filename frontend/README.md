@@ -1,70 +1,92 @@
-# Getting Started with Create React App
+# Documentação front-end
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Estrutura das pastas
 
-## Available Scripts
+```
+| - src
+| -- _layouts
+| -- apis
+| --- Entidade
+| -- assets
+| -- components
+| -- hooks
+| --- Entidade
+| -- pages
+| -- routes
+| -- services
+| -- styles
+| -- util
+| -- app.js
+| -- index.js
+```
 
-In the project directory, you can run:
+Descrição:
 
-### `yarn start`
+- /\_layouts: contém o layout (design) que é utilizado na plataforma.
+- /apis: contém os códigos de acesso a API utilizando o axios.
+- /assets: contém as imagens do projeto;
+- /hooks: contém os códigos responsáveis pela manipulação da lógica da aplicação, ele faz a manipulação das chamadas a API, além de facilitar a escalabidade do projeto.
+- /pages: contém os componentes que são renderizados do projeto.
+- /components: contém os componentes que são utilizados nas pages, como exemplo a SideBar.
+- /util: contém algumas utilidades como as Schemas de validação.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+A escolha desse padrão foi feita com objetivo de facilitar a escalabidade do projeto e com base em outros projetos feitos e no meu atual trabalho.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Decisões do Projeto
 
-### `yarn test`
+- Axios: Fui apresentado ao axios quando começei a estudar frontEnd com ReactJs, desde então é que eu tenho mais experiência e além de ser bastante completo e fácil de configurar.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Yup: Por ser facilmente reutilizado, utilizei as schemas feitas no backend para o frontend.
 
-### `yarn build`
+- Material-UI: Pela a facilidade de criação de tabelas, modais e como teria pouco tempo para desenvolver o projeto, decidi utilizar algo mais prático e bastante conhecido como é essa framework.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Formik: Utilizar o formik foi uma decisão baseada no conhecimento que a MaxxiData utiliza ele em suas decisões, para conhecer um pouco mais, resolvi utilizar ele para extrair o conhecimento da utilização na prática e reconheci que é de fácil utilização.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Styled-components: A forma de estilizar que tenho mais conhecimento depois do CSS e com ele é fácil manipular a estilização de componentes como o do Material-UI.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Telas da aplicação
 
-### `yarn eject`
+Tela do profissionais
+![Tela 1](files/profissionais.jpeg)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Modal de criação
+![Tela 2](files/modalProfissional.jpeg)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Modal de edição
+![Tela 3](files/editarProfissional.jpeg)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Tela das profissões
+![Tela 4](files/profissoes.jpeg)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Modal de criação
+![Tela 5](files/modalProfissao.jpeg)
 
-## Learn More
+## Rodar localmente
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Requisitos
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Rodar localmente o backend
 
-### Code Splitting
+Clone o projeto
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+  git clone https://github.com/Cristianojr9/fullstack-challenge/tree/master/frontend
+```
 
-### Analyzing the Bundle Size
+Inicie o backend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+    Inicie o backend localmente
+```
 
-### Making a Progressive Web App
+Instale as dependências
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```bash
+  yarn
+```
 
-### Advanced Configuration
+Inicie o servidor
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+  yarn start
+```
