@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { shade } from "polished";
 
 import { Form as FormC, Field } from "formik";
 import Modal from '@material-ui/core/Modal';
@@ -86,17 +87,6 @@ export const Form = styled(FormC)`
   height: 320px;
   padding: 20px;
   border-radius: 10px;
-
-  button {
-    width: 100%;
-    height: 60px;
-    border: none;
-    background: #036672;
-    border-radius: 10px;
-    color: #fff;
-    font-size: 18px;
-    font-weight: bold;
-  }
 `;
 
 export const Input = styled(Field)`
@@ -106,4 +96,31 @@ export const Input = styled(Field)`
   font-size: 18px;
   border: 2px solid #036672;
   border-radius: 10px;
+`;
+
+export const InputGroupsModal = styled.div`
+  display: flex;
+  align-items: center; 
+  height: 20px;
+`;
+
+export const ButtonModal = styled.button`
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background: #036672;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+
+  transition: 0.2s linear;
+
+  &:hover {
+    background: ${shade(0.2,"#036672")}
+  }
 `;

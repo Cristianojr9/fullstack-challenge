@@ -1,9 +1,24 @@
 import React, { useState, useEffect } from "react";
+import { Formik } from "formik";
+import { MdClose } from "react-icons/md";
 
 import { useProfessional } from "../../hooks";
-import { Table, FormModal } from "../../components";
+import { Table } from "../../components";
 
-import { Container, Content, Header, Title, Button } from "./styles";
+import { 
+  Container, 
+  Content, 
+  Header, 
+  Title, 
+  Button,
+  ModalProfession,
+  Form,
+  HeaderModal,
+  TitleModal,
+  Input,
+  InputGroupsModal,
+  ButtonModal
+} from "./styles";
 
 const columns = [
   { field: "id", headerName: "ID", width: 70 },
@@ -19,6 +34,7 @@ const Professionals = () => {
  
   const [isOpen, setIsOpen] = useState(false);
   const [rows, setRows] = useState([]);
+  const [editMode, setEditMode] = useState(false);
 
   useEffect(() => {
     listProfessionals();
@@ -51,12 +67,39 @@ const Professionals = () => {
         <Table columns={columns} rows={rows} onCellClick={() => handleOpenModal()} loading={isLoading} />
       </Content>
 
-      {isOpen && 
-        <FormModal
-          modalIsOpen={isOpen}
-          closeModal={() => handleCloseModal()}
-        />
-      }
+      <ModalProfession
+        open={isOpen}
+        onClose={() => handleCloseModal()}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+        {(
+          <Formik
+            // initialValues={selectedProfession}
+            // validationSchema={professionSchema}
+            /* onSubmit={(values) => {
+              if (selectedProfession) return editProfession(values, selectedProfession.id)
+              storeProfession(values)
+              setIsOpen(false)
+            }} */
+          > 
+            <Form style={{ display: "grid" }}>
+              <HeaderModal>
+                <TitleModal>{!editMode ? "Adicionar Profissão" : "Editar Profissão"}</TitleModal>
+
+                <MdClose size={25} onClick={handleCloseModal} style={{ cursor: "pointer" }}/>
+              </HeaderModal>
+              <Input placeholder="Descrição" name="description" type="text" style={{ width: "100%" }} required/>
+
+              <InputGroupsModal>
+                <Input type="checkbox" name="active" style={{ width: "20px", height: "20px" }} />
+                <label style={{ marginLeft: "10px" }}>Ativo</label> 
+              </InputGroupsModal>
+              <ButtonModal type="submit">{isLoading ? "Carregando" : "Salvar"}</ButtonModal>
+            </Form>
+          </Formik>
+        )}
+      </ModalProfession>
     </Container>
   );
 }

@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 
-import { getAllProfessionals, getProfession } from "../../apis";
+import { getAllProfessionals, updateProfessional, createProfessional, getProfession } from "../../apis";
 
 const useProfessional = () => {
   const [professionals, setProfessionals] = useState([]);
@@ -22,12 +22,38 @@ const useProfessional = () => {
 
   const getProfessionName = useCallback((id) => {
     const get = async () => {
+      setIsLoading(true);
       await getProfession(id).then(response => {
         setProfessionName(response.description);
-      });
+        setIsLoading(false);
+      }).catch(error => setError(error)); 
     }
 
     get();
+  }, []);
+
+  const storeProfessional = useCallback((data) => {
+    const create = async () => {
+      setIsLoading(true);
+      await createProfessional(data).then(({ data }) => {
+        setProfessionals(list => [...list, data]);
+        setIsLoading(false);
+      }).catch(error => setError(error)); 
+    };
+
+    create();
+  }, []);
+
+  const editProfessional = useCallback((data, id) => {
+    const update = async () => {
+      setIsLoading(true);
+      await updateProfessional(data, id).then(({ data }) => {
+        setProfessionals(list => [...list, data]);
+        setIsLoading(false);
+      }).catch(error => setError(error)); 
+    };
+
+    update();
   }, [])
 
   return {
@@ -38,6 +64,8 @@ const useProfessional = () => {
 
     listProfessionals,
     getProfessionName,
+    storeProfessional,
+    editProfessional,
   }
 };
 

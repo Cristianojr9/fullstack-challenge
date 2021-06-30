@@ -1,4 +1,8 @@
 import styled from "styled-components";
+import { shade } from "polished";
+
+import { Form as FormC, Field } from "formik";
+import Modal from '@material-ui/core/Modal';
 
 export const Container = styled.div`
   width: 100%;
@@ -10,6 +14,17 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
+`;
+
+export const ModalProfession = styled(Modal)`
+  width: 100%;
+  height: 100%;
+
+  background: #fffa;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Header = styled.div`
@@ -43,5 +58,69 @@ export const Button = styled.button`
     background: #fff;
     color: #036672;
     border: 2px solid #036672;
+  }
+`;
+
+export const TitleModal = styled.div`
+  color: #036672;
+  font-weight: bold;
+`;
+
+export const HeaderModal = styled.div`
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  button {
+    width: 100%;
+    background: transparent;
+    border: none;
+  }
+`;
+
+export const Form = styled(FormC)`
+  margin-top: 20px;
+
+  background: #fff;
+  width: 500px;
+  height: 320px;
+  padding: 20px;
+  border-radius: 10px;
+`;
+
+export const Input = styled(Field)`
+  width: 100%;
+  height: 60px;
+  padding: 0 20px;
+  font-size: 18px;
+  border: 2px solid #036672;
+  border-radius: 10px;
+`;
+
+export const InputGroupsModal = styled.div`
+  display: flex;
+  align-items: center; 
+  height: 20px;
+`;
+
+export const ButtonModal = styled.button`
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background: #036672;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+
+  transition: 0.2s linear;
+
+  &:hover {
+    background: ${shade(0.2,"#036672")}
   }
 `;

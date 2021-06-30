@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Formik } from 'formik';
-import { MdClose } from "react-icons/md"
+import { Formik } from "formik";
+import { MdClose } from "react-icons/md";
 
 import { useProfession } from "../../hooks";
 import { Table } from "../../components";
@@ -15,7 +15,9 @@ import {
   Input, 
   ModalProfession, 
   HeaderModal,
-  TitleModal
+  TitleModal,
+  InputGroupsModal,
+  ButtonModal,
 } from "./styles";
 
 const columns = [
@@ -25,7 +27,13 @@ const columns = [
 ];
 
 const Professions = () => {
-  const { professions, listProfessions, isLoading, storeProfession } = useProfession();
+  const { 
+    professions, 
+    listProfessions, 
+    isLoading, 
+    storeProfession, 
+    editProfession 
+  } = useProfession();
  
   const [isOpen, setIsOpen] = useState(false);
   const [editMode, setEditMode] = useState(false);
@@ -40,7 +48,7 @@ const Professions = () => {
     setRows(professions.map(profession => ({
       ...profession,
       status: profession.active ? "Sim" : "Não"
-    })))
+    })));
   }, [professions]);
 
   const handleOpenModal = () => {
@@ -86,8 +94,9 @@ const Professions = () => {
             initialValues={selectedProfession}
             // validationSchema={professionSchema}
             onSubmit={(values) => {
+              if (selectedProfession) return editProfession(values, selectedProfession.id)
               storeProfession(values)
-              setIsOpen(false)
+              // setIsOpen(false)
             }}
           > 
             <Form style={{ display: "grid" }}>
@@ -96,13 +105,13 @@ const Professions = () => {
 
                 <MdClose size={25} onClick={handleCloseModal} style={{ cursor: "pointer" }}/>
               </HeaderModal>
-              <Input placeholder="Descrição" name="description" type="text" style={{ width: "100%" }}/>
+              <Input placeholder="Descrição" name="description" type="text" style={{ width: "100%" }} required/>
 
-              <div className="checkboxActive" style={{ display: "flex", alignItem: "center", height: "20px" }}>
+              <InputGroupsModal>
                 <Input type="checkbox" name="active" style={{ width: "20px", height: "20px" }} />
                 <label style={{ marginLeft: "10px" }}>Ativo</label> 
-              </div>
-              <button>Salvar</button>
+              </InputGroupsModal>
+              <ButtonModal type="submit">{isLoading ? "Carregando" : "Salvar"}</ButtonModal>
             </Form>
           </Formik>
         )}
