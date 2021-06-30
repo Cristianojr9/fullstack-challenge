@@ -3,7 +3,7 @@ import { Formik } from "formik";
 import { MdClose } from "react-icons/md";
 
 import { useProfessional, useProfession } from "../../hooks";
-import { phoneMask } from "../../util";
+import { professionalSchema } from "../../util";
 import { Table } from "../../components";
 
 import { 
@@ -31,20 +31,26 @@ const columns = [
 ];
 
 const Professionals = () => {
-  const { professionals, listProfessionals, isLoading } = useProfessional();
-  const { professions } = useProfession();
- 
+  const { professionals, listProfessionals, isLoading, storeProfessional, editProfessional } = useProfessional();
+  const { professions, listProfessions } = useProfession();
+
+  const [selectedProfessional, setSelectedProfessional] = useState({});
+  const [selectedValue, setSelectedValue] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
   const [rows, setRows] = useState([]);
   const [editMode, setEditMode] = useState(false);
 
+  const { id } = selectedProfessional;
+
   useEffect(() => {
+    listProfessions();
     listProfessionals();
-  }, [listProfessionals]);
+  }, [listProfessionals, listProfessions]);
 
   useEffect(() => {
     setRows(professionals.map(professional => ({
       ...professional,
+      profession: professional.professionId,
       status: professional.active ? 'Sim' : 'Não'
     })))
   }, [professionals]);
@@ -57,6 +63,27 @@ const Professionals = () => {
     setIsOpen(false);
   };
 
+  const handleChangeSelect = (e) => {
+    setSelectedValue(parseInt(e.target.value));
+  };
+
+  const handleSubmit = (values) => {
+    const data = { 
+      ...values,
+      professionId: selectedValue
+    };
+
+    console.log(data);
+
+    if (id) { 
+      editProfessional(data, id);
+      handleCloseModal(true); 
+    } else {
+      storeProfessional(data);
+      handleCloseModal(true);
+    }
+  }
+
   return (
     <Container>
       <Header>
@@ -66,7 +93,16 @@ const Professionals = () => {
       </Header>
 
       <Content>
-        <Table columns={columns} rows={rows} onCellClick={() => handleOpenModal()} loading={isLoading} />
+        <Table 
+          columns={columns} 
+          rows={rows} 
+          loading={isLoading} 
+          onCellClick={(val) => {
+            setSelectedProfessional(val)
+            setIsOpen(true)
+            setEditMode(true)
+          }} 
+        />
       </Content>
 
       <ModalProfession
@@ -77,19 +113,17 @@ const Professionals = () => {
       >
         {(
           <Formik
-            // initialValues={selectedProfession}
-            // validationSchema={professionSchema}
-            onSubmit={(values) => {
-              console.log(values);
-            }}
+            initialValues={selectedProfessional}
+            validationSchema={professionalSchema}
+            onSubmit={values => handleSubmit(values)}
           > 
             <Form style={{ display: "grid" }}>
               <HeaderModal>
                 <TitleModal>
                   {
                     !editMode ? 
-                    "Adicionar Profissão" : 
-                    "Editar Profissão"
+                    "Adicionar Profissional" : 
+                    "Editar Profissional"
                   }
                 </TitleModal>
 
@@ -105,25 +139,36 @@ const Professionals = () => {
               <Input 
                 placeholder="Email" 
                 name="email" 
-                type="text" 
+                type="email" 
                 style={{ width: "100%" }} 
                 required
               />
               <Input 
-                placeholder="Phone" 
+                placeholder="Telefone" 
                 name="phone" 
-                type="text" 
-                mask={phoneMask} 
+                type="number" 
                 style={{ width: "100%" }} 
                 required
+                maxLength={9}
+                //mask={phoneMask}
               />
-              <select>
+              <Input 
+                name="professionId" 
+                as="select"
+                initialValue={1}
+                style={{ width: "100%" }} 
+                onChange={(e) => handleChangeSelect(e)}
+                required
+              >
                 {professions.map(({ id, description}) => (
-                  <p value={id} key={id}>
+                  <option 
+                    value={id} 
+                    key={id} 
+                  >
                     {description}
-                  </p>
+                  </option>
                 ))}
-              </select>
+              </Input>
 
               <InputGroupsModal>
                 <Input 

@@ -10,7 +10,7 @@ export default {
       const schema = Yup.object().shape({
         name: Yup.string().required(),
         email: Yup.string().required(),
-        phone: Yup.string().required(),
+        phone: Yup.number().required(),
         professionId: Yup.number().required(),
         active: Yup.bool().required()
       });
@@ -25,9 +25,10 @@ export default {
         return res.status(400).json({ error: "Professional already exists" });
       };
 
-      const { name, email, phone, professionId, active } = await Professional.create(req.body); 
+      const { id, name, email, phone, professionId, active } = await Professional.create(req.body); 
 
       return res.status(201).json({
+        id,
         name, 
         email, 
         phone, 
@@ -57,13 +58,13 @@ export default {
         id: req.params.id
       });
 
-      return res.status(201).json({
+      return res.status(200).json({
         id, 
         name, 
         email, 
         phone, 
         professionId, 
-        active 
+        active
       });
     } catch (error) {
       return res.status(400).json({ error: "Something wrong with this professional. We cannot list it." });
@@ -87,9 +88,10 @@ export default {
 
       const professional = await Professional.findOne({ where: { id: req.params.id } });
 
-      const { name, email, phone, professionId, active } = await professional.update(req.body);
+      const { id, name, email, phone, professionId, active } = await professional.update(req.body);
 
       return res.status(200).json({
+        id, 
         name, 
         email, 
         phone, 

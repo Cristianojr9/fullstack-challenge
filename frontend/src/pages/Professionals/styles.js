@@ -87,6 +87,17 @@ export const Form = styled(FormC)`
   height: 520px;
   padding: 20px;
   border-radius: 10px;
+
+  select {
+    width: 100%;
+    height: 60px;
+    padding: 0 20px;
+    font-size: 18px;
+    border: 2px solid #036672;
+    border-radius: 10px;
+    margin: 0px 0;
+    background: transparent;
+  }
 `;
 
 export const Input = styled(Field)`

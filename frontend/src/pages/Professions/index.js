@@ -91,7 +91,7 @@ const Professions = () => {
       storeProfession(data);
       handleCloseModal(true);
     }
-  }
+  };
 
   return (
     <Container>

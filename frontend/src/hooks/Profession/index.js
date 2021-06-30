@@ -1,9 +1,10 @@
 import { useCallback, useState } from "react";
 
-import { getAllProfessions, createProfession, updateProfession} from "../../apis";
+import { getAllProfessions, createProfession, updateProfession, getProfession } from "../../apis";
 
 const useProfession = () => {
   const [professions, setProfessions] = useState([]);
+  const [professionName, setProfessionName] = useState("");
   const [error, setError] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -17,6 +18,16 @@ const useProfession = () => {
     };
 
     list();
+  }, []);
+
+  const showProfession = useCallback((id) => {
+    const show = async () => {
+      await getProfession(id).then(({ data }) => {
+        setProfessionName(data.description);
+      })
+    };
+
+    show();
   }, []);
   
   const storeProfession = useCallback((data) => {
@@ -47,10 +58,12 @@ const useProfession = () => {
     professions,
     error,
     isLoading,
+    professionName,
 
     listProfessions,
     storeProfession,
     editProfession,
+    showProfession,
   }
 };
 
