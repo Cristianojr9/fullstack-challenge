@@ -15,4 +15,7 @@ export default createGlobalStyle`
     text-decoration: none;
     cursor: pointer;
   }
+  button {
+    cursor: pointer;
+  }
 `;
